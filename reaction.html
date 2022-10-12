@@ -15,24 +15,32 @@
     <div id="target">Your Time</div>
     <div id="countdown">Count</div>
 
-    <button type="button" class="btn btn-primary" onclick="buttonPress2()"> Start Timer.</button>
+    <button type="button" class="btn btn-primary" onclick="startTime()"> Start Timer.</button>
     <button type="button" class="btn btn-primary" onclick="recordReact()"> React Now.</button>
     
     <script>
-      var myTime = "";
+      var myTime;
       function recordReact() {
-        setTimeout(function(){
-          myTime = Date.now();
-          console.log(myTime);
-        })
+        myTime = Date.now();
+        console.log(myTime);
       }
 
-      function buttonPress2() {
-        setTimeout(()=>{
-          document.getElementById('target').style.color = "red"
-        })
+      function startTime() {
+        for (let i = 0; i < 4; i++){
+          setTimeout(() => {
+            document.getElementById("countdown").innerHTML = i;
+          }, (3-i)*1000);
+        }
+        setTimeout(() => {
+          if (myTime == 'undefined'){
+            document.getElementById("target").innerHTML = "Too Slow";
+          } else{
+            var buttonTime = Date.now();
+            buttonTime -= myTime;
+            document.getElementById("target").innerHTML = "Time was " + buttonTime;
+          }
+        }, 3000);
       }
     </script>
-
   </body>
 </html>
