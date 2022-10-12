@@ -25,7 +25,7 @@
 
 	<body>
 		<h1>Ben builds a cycler</h1>
-		<input type="text" id="userIn">
+		<input type="text" id="userIn"><br><br>
 		<div class="flex-container" id="target">
 		  <div class="cycler">row item 1</div>   
 		  <div class="cycler">row item 2</div>  
@@ -34,6 +34,8 @@
 	
 		<p> Press the button to create an new element of type div and then add it to the container.</p>
 		<button onclick="makeNewDiv()">Add One</button>
+		<button onclick="get()">Get</button>
+		<button onclick="spin()">Spin</button>
 	</body>
 	<script>
 		function makeNewDiv(){
@@ -47,7 +49,23 @@
 			/* add it to the container */
 			let container = document.getElementById('target');
 			container.appendChild(element);
-		
+		}
+		function get(){
+			var cyclerItems = document.getElementsByClassName("cycler");
+			var len = cyclerItems.length;
+			if (len > 0){
+				cyclerItems[len-1].remove();
+			}
+		}
+		function spin(){
+			var cyclerItems = document.getElementsByClassName("cycler");
+			var len = cyclerItems.length;
+			if (len > 1){
+				var removedItem = cyclerItems[len-1];
+				cyclerItems[len-1].remove();
+				var parentElem = document.getElementById("target");
+				parentElem.insertBefore(removedItem, parentElem.firstChild);
+			}
 		}
 	</script>
 </html>	
